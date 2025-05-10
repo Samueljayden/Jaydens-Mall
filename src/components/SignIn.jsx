@@ -1,89 +1,61 @@
-import axios from "axios";
 import { useState } from "react";
-import { useNavigate, Link  } from "react-router-dom";
-import Footer from "./Footer";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 
 const SignIn = () => {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");  // Updated to password state
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
+  const location = useLocation();
 
-    let[username, setUsername] = useState("");
-    let[password, setPassword] = useState("");
-    let[success, setSuccess] = useState("");
-    let[error, setError] = useState("");
-    let[loading, setLoading] = useState ("");
+  const from = location.state?.from?.pathname || "/";
 
-    const navigate = useNavigate()
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
-    const submitForm = async (e) => {
-        e.preventDefault();
-
-        try {
-            setError("");
-            setSuccess("");
-            setLoading("Please wait ....");
-
-            const data = new FormData()
-            data.append("username", username);
-            data.append("password", password);
-
-            const response = await axios.post("http://Samuelgreg.pythonanywhere.com/api/signin ", data);
-            
-            if(response.data.user) {
-                localStorage.setItem("user", JSON.stringify(response.data.user))
-                navigate("/");
-            } else {
-                setLoading("");
-                setError(response.data.message);
-            }
-        } catch (error) {
-            setLoading("");
-            setError(error.message);
-        }
-    };
-
-    const togglePassword = () => {
-        const passwordInput = document.getElementById("password");
-        const icon = document.getElementById("icon")
-
-        let current_type = passwordInput.getAttribute("type")
-        let new_type = ""
-        if (current_type === "password"){
-            new_type = "text"
-            icon.classList.remove("bi-eye-fill");
-            icon.classList.add("bi-eye-slash-fill");
-        } else {
-            new_type = "password"
-            icon.classList.add("bi-eye-slash-fill");
-            icon.classList.remove("bi-eye-fill");
-        }
-        passwordInput.setAttribute("type", new_type);
-
+    if (!username.trim() || !password.trim()) {
+      setError("Username and Password are required");
+      return;
     }
-    return (
-       <div className="row justify-content-center mt-4">
-        <div className="col-md-6 card shadow p-4">
-            <h2>Sign In</h2>
-            <b className="text-success">{success}</b>
-            <b className="text-warning">{loading}</b>
-            <b className="text-danger">{error}</b>
-            <form onSubmit={submitForm}>
-                <input type="text" placeholder="Enter Username :" required className="form-control" onChange={(e) => setUsername(e.target.value)} />
-                <br />
-                <div className="input-group">
-                <input type="text" placeholder="Enter Password :" required id="password" className="form-control" onChange={(e) => setPassword(e.target.value)} />
-                <span className="input-group-text" onClick={togglePassword}><i id="icon" class="bi bi-eye-fill"></i></span>
-                </div>
-                <br />
-                <button className="btn btn-primary" type="submit">Signin</button>
-            </form>
 
-            <p>Don't have an account? <Link to="/signup">Sign Up</Link></p>
+    // Store username and password in localStorage (for simplicity, in real apps avoid storing passwords this way)
+    localStorage.setItem("username", username);
+    localStorage.setItem("password", password);
+
+    // Redirect to the page the user was originally trying to access
+    navigate(from, { replace: true });
+  };
+
+  return (
+    <div className="container mt-5">
+      <h2>Signin</h2>
+      <form onSubmit={handleSubmit}>
+        {error && <div className="alert alert-danger">{error}</div>}
+        <div className="mb-3">
+          <input
+            className="form-control"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            placeholder="Enter your username :"
+          />
         </div>
-        <br />
-        <hr />
-        <br />
-        <Footer />
-       </div>
-    );
-}
- 
+        <div className="mb-3">
+          <input
+            type="password"  // Changed to password input field
+            className="form-control"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Enter your password :"
+          />
+        </div>
+        <button className="btn btn-primary">Login</button>
+      </form>
+
+      <div className="mt-3">
+        <Link to="/forgot-password">Forgot Password?</Link>
+      </div>
+    </div>
+  );
+};
+
 export default SignIn;
