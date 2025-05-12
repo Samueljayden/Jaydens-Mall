@@ -26,6 +26,7 @@ function AppContent() {
     <>
       {location.pathname !== '/' && <Navbar />}
       <div className="App">
+        
         <Routes>
           <Route path="/" element={<Navigate to="/getproducts" />} />
           <Route path="/getproducts" element={<GetProducts />} />
