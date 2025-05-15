@@ -13,6 +13,7 @@ import Cart from './components/Cart';
 import GetProducts from './components/GetProducts';
 import Contact from './components/Contact';
 import ForgotPassword from './components/ForgotPassword';
+import Delivery from './components/Delivery';
 import ProtectedRoute from './components/ProtectedRoute'; // Import your protected route
 
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -81,6 +82,15 @@ function AppContent() {
             </ProtectedRoute>
           }
         />
+          <Route
+            path="/delivery"
+            element={
+              <ProtectedRoute>
+                <Delivery />
+              </ProtectedRoute>
+            }
+          />
+    
           <Route
             path="/cart"
             element={

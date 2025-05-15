@@ -96,13 +96,13 @@ const ContactForm = () => {
 const styles = {
     contactFormContainer: {
         padding: '20px',
-        backgroundColor: '#f8f9fa',
+        backgroundColor: 'warning',
         borderRadius: '5px',
         maxWidth: '600px',
         margin: '0 auto'
     },
     contactCard: {
-        backgroundColor: '#fff',
+        backgroundColor: '#000',
         padding: '20px',
         borderRadius: '5px',
         boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)'
@@ -122,7 +122,7 @@ const styles = {
         textAlign: 'center',
         marginTop: '20px',
         fontSize: '14px',
-        color: '#6c757d'
+        color: '#000'
     }
 };
 

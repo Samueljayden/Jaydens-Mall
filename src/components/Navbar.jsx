@@ -64,6 +64,7 @@ const Navbar = () => {
                 <Link to="/about" className="btn btn-danger mx-2">About</Link>
                 <Link to="/contact" className="btn btn-danger mx-2">Contact</Link>
                 <Link to="/map" className="btn btn-danger mx-2">Map</Link>
+                <Link to="/delivery" className="btn btn-danger mx-2">Delivery</Link>
               </div>
 
               <div className="navbar-nav ms-auto align-items-center">

@@ -6,7 +6,7 @@ import Footer from "./Footer";
 const AddProduct = () => {
     let[product_name, setProductName] = useState("")
     let[product_desc, setProductDesc] = useState("")
-    let[product_cost, setProductCoct] = useState("")
+    let[product_cost, setProductCost] = useState("")
     let[product_photo, setProductPhoto] = useState("")
     let[product_cat, setProductCat] = useState("")
 
@@ -34,7 +34,7 @@ const AddProduct = () => {
 
             setProductName("");
             setProductDesc("");
-            setProductCoct("");
+            setProductCost("");
             setProductPhoto("");
             setProductCat("");
             console.log();
@@ -62,7 +62,7 @@ const AddProduct = () => {
                 <form onSubmit={submitForm}>
                     <input type="text" placeholder="Enter product name :" required className="form-control"  onChange={(e) => setProductName(e.target.value)} value={product_name}/>  <br />
                     <textarea name="" id="" className="form-control" placeholder="Product Description :" required onChange={(e) => setProductDesc(e.target.value)} value={product_desc}></textarea> <br />
-                    <input type="number" placeholder="Procuct Cost :" required onChange={(e) => setProductCoct(e.target.value)} className="form-control"  value={product_cost}/> <br />
+                    <input type="number" placeholder="Procuct Cost :" required onChange={(e) => setProductCost(e.target.value)} className="form-control"  value={product_cost}/> <br />
                     <input type="text" placeholder="Enter product category :" required className="form-control" onChange={(e) => setProductCat(e.target.value)} value={product_cat} /> <br />
                     <p>Product Photo</p>
                     <input type="file"  className="form-control" required onChange={(e) => setProductPhoto(e.target.files[0])}/> <br />

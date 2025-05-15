@@ -165,6 +165,7 @@
 // export default SignUp;
 import axios from "axios";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import Footer from "./Footer";
 
 const SignUp = () => {
@@ -322,6 +323,7 @@ const SignUp = () => {
                     <button type="submit" className="btn btn-primary w-100">
                         Sign Up
                     </button>
+                    <Link to="/signin">Sign in</Link>
                 </form>
             </div>
             <br />

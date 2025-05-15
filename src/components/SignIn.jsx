@@ -52,7 +52,8 @@ const SignIn = () => {
       </form>
 
       <div className="mt-3">
-        <Link to="/forgot-password">Forgot Password?</Link>
+        <Link to="/forgot-password">Forgot Password?</Link><br />
+        <Link to="/signup">Don't have an account? Sign Up</Link>
       </div>
     </div>
   );
