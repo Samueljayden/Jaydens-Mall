@@ -64,7 +64,7 @@ const Cart = () => {
     }
 
     try {
-      const response = await fetch("https://samuelgreg.pythonanywhere.com/api/mpesa/checkout", {
+      const response = await fetch("https://samuelgreg.pythonanywhere.com/api/mpesa_payment", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
