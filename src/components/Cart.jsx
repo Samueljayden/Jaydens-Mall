@@ -8,7 +8,7 @@ const Cart = () => {
   });
 
   const [cartTotal, setCartTotal] = useState(0);
-  const [phoneNumber, setPhoneNumber] = useState("");
+  const [phone, setPhone] = useState("");
 
   const calculateTotal = () => {
     if (cart.length === 0) {
@@ -49,14 +49,7 @@ const Cart = () => {
   };
 
   const handleMpesaCheckout = async () => {
-    const normalizedPhone = phoneNumber
-      .replace(/\s+/g, "")                // remove all whitespace
-      .replace(/^(\+?254|0)/, "254");     // ensure phone starts with '254'
-
-    if (!/^2547\d{8}$/.test(normalizedPhone)) {
-      alert("Please enter a valid Safaricom phone number (e.g. 0712345678 or +254712345678)");
-      return;
-    }
+    const normalizedPhone = phone
 
     if (cartTotal <= 0) {
       alert("Cart is empty or total is invalid.");
@@ -70,7 +63,7 @@ const Cart = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          phone: normalizedPhone,
+          phone: phone,
           amount: cartTotal,
         }),
       });
@@ -81,7 +74,7 @@ const Cart = () => {
         alert("M-Pesa prompt sent. Please complete the payment.");
         setCart([]);
         setCartTotal(0);
-        setPhoneNumber("");
+        setPhone("");
         navigate("/order-success");
       } else {
         alert(`Payment failed: ${data.message || "Unknown error"}`);
@@ -149,8 +142,8 @@ const Cart = () => {
             <input
               type="tel"
               placeholder="Enter M-Pesa phone number"
-              value={phoneNumber}
-              onChange={(e) => setPhoneNumber(e.target.value)}
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
               className="form-control my-2"
             />
             <button className="btn btn-success w-100" onClick={handleMpesaCheckout}>
