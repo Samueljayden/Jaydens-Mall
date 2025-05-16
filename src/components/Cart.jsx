@@ -49,7 +49,6 @@ const Cart = () => {
   };
 
   const handleMpesaCheckout = async () => {
-    const normalizedPhone = phone
 
     if (cartTotal <= 0) {
       alert("Cart is empty or total is invalid.");
